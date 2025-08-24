@@ -1,5 +1,5 @@
 # gpt_client.py
-import os
+import os #za rad sa environment varijablama
 from openai import OpenAI
 from dotenv import load_dotenv
 
@@ -9,8 +9,10 @@ load_dotenv()
 class GPTClient:
     def __init__(self, model: str | None = None):
         self.client = OpenAI()
-        # default model, možeš promeniti preko .env ako hoćeš
         self.model = model or os.getenv("OPENAI_MODEL", "gpt-4o-mini")
+
+        # Debug print da proveriš koji model je aktivan
+        print(f"[GPTClient] Koristim model: {self.model}")
 
     def ask(self, question: str) -> str:
         """
@@ -21,3 +23,8 @@ class GPTClient:
             input=question.strip()
         )
         return resp.output_text
+    
+
+        
+    
+
