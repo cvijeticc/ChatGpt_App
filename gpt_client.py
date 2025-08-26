@@ -1,5 +1,5 @@
 # gpt_client.py
-import os #za rad sa environment varijablama
+import os  # za rad sa environment varijablama
 from openai import OpenAI
 from dotenv import load_dotenv
 
@@ -23,8 +23,20 @@ class GPTClient:
             input=question.strip()
         )
         return resp.output_text
-    
 
-        
-    
+    def ask_with_prompt(self, question: str, prompt: str) -> str:
+        """
+        Poziva OpenAI Responses API tako da ubaci i prompt i pitanje.
+        """
+        full_input = f"{prompt.strip()}\n\nPitanje: {question.strip()}"
+        resp = self.client.responses.create(
+            model=self.model,
+            input=full_input
+        )
+        return resp.output_text
+
+
+
+
+
 
